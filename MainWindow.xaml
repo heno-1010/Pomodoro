@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pomodoro"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="ポモドーロ" Height="450" Width="800">
+    <Grid Margin="10,10,10,10">
+        <TextBlock x:Name="Timer" Text="25:00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
+        <Button x:Name="StartButton" Content="スタート" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,100" Width="100" Height="40" Click="StartButton_Click"/>
+        
     </Grid>
 </Window>
