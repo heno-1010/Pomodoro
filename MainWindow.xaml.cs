@@ -21,7 +21,7 @@ namespace Pomodoro
         private int Settingtime = 1 * 60;
         private int Breaktime = 1 * 60;
         private int Remainingtime;
-        private bool _isTimerRunning = false;
+        private bool _isTimerRunning = false; // タイマーが動作中かどうかを示す
         private bool mode = false; // trueなら作業, falseなら休憩
 
         public MainWindow()
@@ -29,15 +29,12 @@ namespace Pomodoro
             InitializeComponent();
         }
 
-        private async void StartButton_Click(object sender, RoutedEventArgs e)
+        private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            if(_isTimerRunning == true)
+            if (_isTimerRunning == false)
             {
-                return;
+                StartWork();
             }
-            mode = true;
-            Remainingtime = Settingtime;
-            await TimerTick();
         }
 
         private async Task TimerTick()
@@ -59,6 +56,7 @@ namespace Pomodoro
                 else
                 {
                     _isTimerRunning = false;
+                    Timer.Text = "25:00";
                 }
             }
             else
@@ -71,6 +69,7 @@ namespace Pomodoro
                 else
                 {
                     _isTimerRunning = false;
+                    Timer.Text = "25:00";
                 }
             }
         }
@@ -81,12 +80,14 @@ namespace Pomodoro
         }
         private async void StartWork()
         {
+            this.Title = "作業中";
             mode = true;
             Remainingtime = Settingtime;
             await TimerTick();
         }
         private async void StartBreak()
         {
+            this.Title = "休憩中";
             mode = false;
             Remainingtime = Breaktime;
             await TimerTick();
