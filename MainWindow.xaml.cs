@@ -22,7 +22,7 @@ namespace Pomodoro
         private int Breaktime = 1 * 60;
         private int Remainingtime;
         private bool _isTimerRunning = false; // タイマーが動作中かどうかを示す
-        private bool mode = false; // trueなら作業, falseなら休憩
+        private bool Workmode = true; // trueなら作業, falseなら休憩
 
         public MainWindow()
         {
@@ -33,7 +33,7 @@ namespace Pomodoro
         {
             if (_isTimerRunning == false)
             {
-                StartWork();
+                StartTimer();
             }
         }
 
@@ -46,12 +46,13 @@ namespace Pomodoro
                 Remainingtime--;
                 Timer.Text = Timer_TextChanged(Remainingtime);
             }
-            if(mode == true)
+            if(Workmode == true)
             {
                 MessageBoxResult result = MessageBox.Show("作業終了。休憩をしますか？", "作業終了", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    StartBreak();
+                    Workmode = false;
+                    StartTimer();
                 }
                 else
                 {
@@ -64,7 +65,8 @@ namespace Pomodoro
                 MessageBoxResult result = MessageBox.Show("休憩終了。作業をしますか？", "休憩終了", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    StartWork();
+                    Workmode = true;
+                    StartTimer();
                 }
                 else
                 {
@@ -78,19 +80,19 @@ namespace Pomodoro
         {
             return Remainingtime / 60 + ":" + Remainingtime % 60;
         }
-        private async void StartWork()
+        private async void StartTimer()
         {
-            this.Title = "作業中";
-            mode = true;
-            Remainingtime = Settingtime;
-            await TimerTick();
-        }
-        private async void StartBreak()
-        {
-            this.Title = "休憩中";
-            mode = false;
-            Remainingtime = Breaktime;
-            await TimerTick();
+            this.Title = Workmode ? "作業中" : "休憩中";
+            if(Workmode == true)
+            {
+                Remainingtime = Settingtime;
+                await TimerTick();
+            }
+            else
+            {
+                Remainingtime = Breaktime;
+                await TimerTick();
+            }
         }
     }
 }
