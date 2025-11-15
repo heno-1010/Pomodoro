@@ -31,9 +31,10 @@ namespace Pomodoro
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_isTimerRunning == false)
+            if (!_isTimerRunning)
             {
                 StartTimer();
+                StartButton.IsEnabled = false;
             }
         }
 
@@ -46,33 +47,27 @@ namespace Pomodoro
                 Remainingtime--;
                 Timer.Text = Timer_TextChanged(Remainingtime);
             }
-            if(Workmode == true)
+            HandleEndOfSession();
+        }
+
+        private void HandleEndOfSession()
+        {
+            string message = Workmode ? "作業終了。休憩をしますか？" : "休憩終了。作業をしますか？";
+            string title = Workmode ? "作業終了" : "休憩終了";
+
+            MessageBoxResult result = MessageBox.Show(message, title, MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
             {
-                MessageBoxResult result = MessageBox.Show("作業終了。休憩をしますか？", "作業終了", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
-                {
-                    Workmode = false;
-                    StartTimer();
-                }
-                else
-                {
-                    _isTimerRunning = false;
-                    Timer.Text = "25:00";
-                }
+                Workmode = !Workmode;
+                StartTimer();
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("休憩終了。作業をしますか？", "休憩終了", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
-                {
-                    Workmode = true;
-                    StartTimer();
-                }
-                else
-                {
-                    _isTimerRunning = false;
-                    Timer.Text = "25:00";
-                }
+                _isTimerRunning = false;
+                Timer.Text = "25:00";
+                this.Title = "ポモドーロタイマー";
+                StartButton.IsEnabled = true;
             }
         }
 
