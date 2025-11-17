@@ -11,11 +11,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Pomodoro
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private int Settingtime = 1 * 60;
@@ -88,6 +86,11 @@ namespace Pomodoro
                 Remainingtime = Breaktime;
                 await TimerTick();
             }
+        }
+        private void SettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            Setting window = new Setting();
+            window.Show();
         }
     }
 }
