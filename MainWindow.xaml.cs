@@ -87,5 +87,21 @@ namespace Pomodoro
                 await TimerTick();
             }
         }
+        private void SaveTimeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(int.TryParse(WorkTimeInput.Text, out int worktimeText) && int.TryParse(BreakTimeInput.Text, out int breaktimeText))
+            {
+                    Worktime = worktimeText * 60;
+                    Breaktime = breaktimeText * 60;
+                    if (Workmode)
+                    {
+                        Timer.Text = Worktime / 60 + ":" + Worktime % 60 + 0;
+                    }
+                    else
+                    {
+                        Timer.Text = Breaktime / 60 + ":" + Breaktime % 60 + 0;
+                    }
+                }
+            }
+        }
     }
-}

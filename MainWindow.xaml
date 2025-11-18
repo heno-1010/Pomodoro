@@ -27,6 +27,9 @@
                 <TextBlock x:Name="BreakTime" Text="休憩時間:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
                 <TextBox x:Name="BreakTimeInput" Text="10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="24" Margin="10,0,0,0"/>
             </StackPanel>
+            <StackPanel>
+                <Button x:Name="SaveTimeButton" Content="変更を保存" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Click="SaveTimeButton_Click" Margin="120,30,0,0"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
