@@ -16,7 +16,7 @@ namespace Pomodoro
 {
     public partial class MainWindow : Window
     {
-        private int Settingtime = 1 * 60;
+        private int Worktime = 1 * 60;
         private int Breaktime = 1 * 60;
         private int Remainingtime;
         private bool _isTimerRunning = false; // タイマーが動作中かどうかを示す
@@ -78,7 +78,7 @@ namespace Pomodoro
             this.Title = Workmode ? "作業中" : "休憩中";
             if(Workmode == true)
             {
-                Remainingtime = Settingtime;
+                Remainingtime = Worktime;
                 await TimerTick();
             }
             else
@@ -86,11 +86,6 @@ namespace Pomodoro
                 Remainingtime = Breaktime;
                 await TimerTick();
             }
-        }
-        private void SettingButton_Click(object sender, RoutedEventArgs e)
-        {
-            Setting window = new Setting();
-            window.Show();
         }
     }
 }

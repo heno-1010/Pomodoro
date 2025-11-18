@@ -10,9 +10,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/> 
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Content="⚙" HorizontalAlignment="Right" VerticalAlignment="Top" Height="40" Click="SettingButton_Click"/>
         <TextBlock x:Name="Timer" Grid.Row="1" Text="25:00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
         <Button x:Name="StartButton" Grid.Row="2" Content="スタート" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Click="StartButton_Click"/>
     </Grid>
