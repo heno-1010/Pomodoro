@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 
 namespace Pomodoro
@@ -19,33 +20,34 @@ namespace Pomodoro
         private int Worktime = 1 * 60;
         private int Breaktime = 1 * 60;
         private int Remainingtime;
-        private bool _isTimerRunning = false; // タイマーが動作中かどうかを示す
         private bool Workmode = true; // trueなら作業, falseなら休憩
+        private DispatcherTimer timer;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += TimerTick;
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!_isTimerRunning)
-            {
-                StartTimer();
-                StartButton.IsEnabled = false;
-            }
+            StartButton.IsEnabled = false;
+            StartTimer();
         }
 
-        private async Task TimerTick()
+        private void TimerTick(object sender, EventArgs e)
         {
-            _isTimerRunning = true;
-            while(Remainingtime > 0)
+            if(Remainingtime <= 0)
             {
-                await Task.Delay(1000);
-                Remainingtime--;
-                Timer.Text = Timer_TextChanged(Remainingtime);
+                timer.Stop();
+                HandleEndOfSession();
+                return;
             }
-            HandleEndOfSession();
+            Remainingtime--;
+            Timer.Text = Timer_TextChanged(Remainingtime);
         }
 
         private void HandleEndOfSession()
@@ -62,7 +64,6 @@ namespace Pomodoro
             }
             else
             {
-                _isTimerRunning = false;
                 Timer.Text = "25:00";
                 this.Title = "ポモドーロタイマー";
                 StartButton.IsEnabled = true;
@@ -76,16 +77,9 @@ namespace Pomodoro
         private async void StartTimer()
         {
             this.Title = Workmode ? "作業中" : "休憩中";
-            if(Workmode == true)
-            {
-                Remainingtime = Worktime;
-                await TimerTick();
-            }
-            else
-            {
-                Remainingtime = Breaktime;
-                await TimerTick();
-            }
+            Remainingtime = Workmode ? Worktime : Breaktime;
+            Timer.Text = Timer_TextChanged(Remainingtime);
+            timer.Start();
         }
         private void SaveTimeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -103,5 +97,19 @@ namespace Pomodoro
                     }
                 }
             }
+
+        private void SwitchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (timer.IsEnabled)
+            {
+                timer.Stop();
+                SwitchButton.Content = "スタート";
+            }
+            else
+            {
+                timer.Start();
+                SwitchButton.Content = "ストップ";
+            }
         }
+    }
     }
