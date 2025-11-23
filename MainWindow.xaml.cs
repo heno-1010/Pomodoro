@@ -17,8 +17,8 @@ namespace Pomodoro
 {
     public partial class MainWindow : Window
     {
-        private int Worktime = 1 * 60;
-        private int Breaktime = 1 * 60;
+        private int Worktime = 25 * 60;
+        private int Breaktime = 10 * 60;
         private int Remainingtime;
         private bool Workmode = true; // trueなら作業, falseなら休憩
         private DispatcherTimer timer;
@@ -76,10 +76,10 @@ namespace Pomodoro
         }
         private async void StartTimer()
         {
+            timer.Start();
             this.Title = Workmode ? "作業中" : "休憩中";
             Remainingtime = Workmode ? Worktime : Breaktime;
             Timer.Text = Timer_TextChanged(Remainingtime);
-            timer.Start();
         }
         private void SaveTimeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -110,6 +110,14 @@ namespace Pomodoro
                 timer.Start();
                 SwitchButton.Content = "ストップ";
             }
+        }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+            Timer.Text = Worktime / 60 + ":" + Worktime % 60 + 0;
+            this.Title = "ポモドーロタイマー";
+            StartButton.IsEnabled = true;
         }
     }
     }
