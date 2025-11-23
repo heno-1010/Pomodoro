@@ -30,6 +30,8 @@ namespace Pomodoro
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
+            SwitchButton.IsEnabled = false;
+            SaveTimeButton.IsEnabled = true;
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -72,15 +74,21 @@ namespace Pomodoro
 
         private string Timer_TextChanged(int Remainingtime)
         {
-            return Remainingtime / 60 + ":" + Remainingtime % 60;
+            int minutes = Remainingtime / 60;
+            int seconds = Remainingtime % 60;
+
+            return string.Format("{0}:{1:D2}", minutes, seconds);
         }
         private async void StartTimer()
         {
             timer.Start();
             this.Title = Workmode ? "作業中" : "休憩中";
             Remainingtime = Workmode ? Worktime : Breaktime;
+            SwitchButton.IsEnabled = true;
+            SaveTimeButton.IsEnabled = false;
             Timer.Text = Timer_TextChanged(Remainingtime);
         }
+
         private void SaveTimeButton_Click(object sender, RoutedEventArgs e)
         {
             if(int.TryParse(WorkTimeInput.Text, out int worktimeText) && int.TryParse(BreakTimeInput.Text, out int breaktimeText))
@@ -117,7 +125,10 @@ namespace Pomodoro
             timer.Stop();
             Timer.Text = Worktime / 60 + ":" + Worktime % 60 + 0;
             this.Title = "ポモドーロタイマー";
+            SwitchButton.Content = "ストップ";
+            SwitchButton.IsEnabled = false;
             StartButton.IsEnabled = true;
+            SaveTimeButton.IsEnabled = true;
         }
     }
     }
