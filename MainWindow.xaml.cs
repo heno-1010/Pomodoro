@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,7 @@ namespace Pomodoro
         private int Remainingtime;
         private bool Workmode = true; // trueなら作業, falseなら休憩
         private DispatcherTimer timer;
+        private int Countpomodoro = 0;
 
         public MainWindow()
         {
@@ -56,9 +58,12 @@ namespace Pomodoro
         {
             string message = Workmode ? "作業終了。休憩をしますか？" : "休憩終了。作業をしますか？";
             string title = Workmode ? "作業終了" : "休憩終了";
-
             MessageBoxResult result = MessageBox.Show(message, title, MessageBoxButton.YesNo);
-
+            if (!Workmode)
+            {
+                Countpomodoro++;
+                CountPomodoro.Text = "ポモドーロ数: " + Countpomodoro;
+            }
             if (result == MessageBoxResult.Yes)
             {
                 Workmode = !Workmode;
@@ -129,6 +134,8 @@ namespace Pomodoro
             SwitchButton.IsEnabled = false;
             StartButton.IsEnabled = true;
             SaveTimeButton.IsEnabled = true;
+            Countpomodoro = 0;
+            CountPomodoro.Text = "ポモドーロ数: " + Countpomodoro;
         }
     }
     }
