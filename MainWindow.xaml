@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" VerticalAlignment="Center">
             <TextBlock x:Name="Timer" Text="25:00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="64"/>
-            <TextBlock x:Name="Mode" Text="作業開始" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+            <TextBlock x:Name="ModeText" Text="作業開始" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
             <TextBlock x:Name="CountPomodoro" Text="ポモドーロ数: 0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Margin="0,3,0,0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0,20,0,0">
                 <Button x:Name="StartButton" Content="スタート" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="StartButton_Click" Margin="0,0,10,0"/>

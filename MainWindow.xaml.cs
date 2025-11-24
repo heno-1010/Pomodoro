@@ -89,6 +89,7 @@ namespace Pomodoro
             timer.Start();
             this.Title = Workmode ? "作業中" : "休憩中";
             Remainingtime = Workmode ? Worktime : Breaktime;
+            ModeText.Text = Workmode ? "作業中" : "休憩中";
             SwitchButton.IsEnabled = true;
             SaveTimeButton.IsEnabled = false;
             Timer.Text = Timer_TextChanged(Remainingtime);
@@ -134,8 +135,6 @@ namespace Pomodoro
             SwitchButton.IsEnabled = false;
             StartButton.IsEnabled = true;
             SaveTimeButton.IsEnabled = true;
-            Countpomodoro = 0;
-            CountPomodoro.Text = "ポモドーロ数: " + Countpomodoro;
         }
     }
     }
