@@ -18,10 +18,10 @@ namespace Pomodoro
 {
     public partial class MainWindow : Window
     {
-        private int Worktime = 25 * 60;
-        private int Breaktime = 10 * 60;
+        public int Worktime = 25 * 60;
+        public int Breaktime = 10 * 60;
         private int Remainingtime;
-        private bool Workmode = true; // trueなら作業, falseなら休憩
+        public bool Workmode = true; // trueなら作業, falseなら休憩
         private DispatcherTimer timer;
         private int Countpomodoro = 0;
 
@@ -33,7 +33,6 @@ namespace Pomodoro
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
             SwitchButton.IsEnabled = false;
-            SaveTimeButton.IsEnabled = true;
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -56,6 +55,7 @@ namespace Pomodoro
 
         private void HandleEndOfSession()
         {
+            this.Topmost = true;
             string message = Workmode ? "作業終了。休憩をしますか？" : "休憩終了。作業をしますか？";
             string title = Workmode ? "作業終了" : "休憩終了";
             MessageBoxResult result = MessageBox.Show(message, title, MessageBoxButton.YesNo);
@@ -91,26 +91,8 @@ namespace Pomodoro
             Remainingtime = Workmode ? Worktime : Breaktime;
             ModeText.Text = Workmode ? "作業中" : "休憩中";
             SwitchButton.IsEnabled = true;
-            SaveTimeButton.IsEnabled = false;
             Timer.Text = Timer_TextChanged(Remainingtime);
         }
-
-        private void SaveTimeButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(int.TryParse(WorkTimeInput.Text, out int worktimeText) && int.TryParse(BreakTimeInput.Text, out int breaktimeText))
-            {
-                    Worktime = worktimeText * 60;
-                    Breaktime = breaktimeText * 60;
-                    if (Workmode)
-                    {
-                        Timer.Text = Worktime / 60 + ":" + Worktime % 60 + 0;
-                    }
-                    else
-                    {
-                        Timer.Text = Breaktime / 60 + ":" + Breaktime % 60 + 0;
-                    }
-                }
-            }
 
         private void SwitchButton_Click(object sender, RoutedEventArgs e)
         {
@@ -134,7 +116,12 @@ namespace Pomodoro
             SwitchButton.Content = "ストップ";
             SwitchButton.IsEnabled = false;
             StartButton.IsEnabled = true;
-            SaveTimeButton.IsEnabled = true;
+        }
+
+        private void SettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            Settings settingsPage = new Settings(this);
+            SettingFrame.Navigate(settingsPage);
         }
     }
     }

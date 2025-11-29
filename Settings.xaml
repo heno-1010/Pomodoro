@@ -1,0 +1,26 @@
+﻿<Page x:Class="Pomodoro.Settings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Pomodoro"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Settings">
+
+    <Grid>
+        <StackPanel VerticalAlignment="Center" Margin="30,0,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock x:Name="WorkTime" Text="作業時間:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                <TextBox x:Name="WorkTimeInput" Text="25" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="24" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock x:Name="BreakTime" Text="休憩時間:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                <TextBox x:Name="BreakTimeInput" Text="10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="24" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel>
+                <Button x:Name="SaveTimeButton" Content="変更を保存" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Click="SaveTimeButton_Click" Margin="120,30,0,0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

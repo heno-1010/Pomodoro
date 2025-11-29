@@ -6,14 +6,11 @@
         xmlns:local="clr-namespace:Pomodoro"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="ポモドーロタイマー" Height="450" Width="800">
+        Title="ポモドーロタイマー" Height="450" Width="450">
     <Grid Margin="10,10,10,10">
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+        <Button x:Name="SettingButton" Content="設定" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Margin="0,0,10,0" Click="SettingButton_Click"/>
+        <StackPanel VerticalAlignment="Center">
+            <Frame x:Name="SettingFrame"/>
             <TextBlock x:Name="Timer" Text="25:00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="64"/>
             <TextBlock x:Name="ModeText" Text="作業開始" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
             <TextBlock x:Name="CountPomodoro" Text="ポモドーロ数: 0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Margin="0,3,0,0"/>
@@ -21,19 +18,6 @@
                 <Button x:Name="StartButton" Content="スタート" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="StartButton_Click" Margin="0,0,10,0"/>
                 <Button x:Name="SwitchButton" Content="ストップ" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="SwitchButton_Click" Margin="0,0,10,0"/>
                 <Button x:Name="ResetButton" Content="リセット" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="ResetButton_Click" Margin="0,0,10,0"/>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="30,0,0,0">
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <TextBlock x:Name="WorkTime" Text="作業時間:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
-                <TextBox x:Name="WorkTimeInput" Text="25" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="24" Margin="10,0,0,0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <TextBlock x:Name="BreakTime" Text="休憩時間:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
-                <TextBox x:Name="BreakTimeInput" Text="10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="24" Margin="10,0,0,0"/>
-            </StackPanel>
-            <StackPanel>
-                <Button x:Name="SaveTimeButton" Content="変更を保存" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Click="SaveTimeButton_Click" Margin="120,30,0,0"/>
             </StackPanel>
         </StackPanel>
     </Grid>
