@@ -25,9 +25,10 @@ namespace Pomodoro
         {
             InitializeComponent();
             _mainwindow = mainWindow;
+            UpdateSetting.Visibility = Visibility.Collapsed;
         }
 
-        private void SaveTimeButton_Click(object sender, RoutedEventArgs e)
+        private async void  SaveTimeButton_Click(object sender, RoutedEventArgs e)
         {
             if (int.TryParse(WorkTimeInput.Text, out int worktimeText) && int.TryParse(BreakTimeInput.Text, out int breaktimeText))
             {
@@ -42,6 +43,9 @@ namespace Pomodoro
                     _mainwindow.Timer.Text = _mainwindow.Breaktime / 60 + ":" + _mainwindow.Breaktime % 60 + 0;
                 }
             }
+            UpdateSetting.Visibility = Visibility.Visible;
+            await Task.Delay(1000);
+            UpdateSetting.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -21,6 +21,7 @@
             </StackPanel>
             <StackPanel>
                 <Button x:Name="SaveTimeButton" Content="変更を保存" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Click="SaveTimeButton_Click" Margin="120,30,0,0"/>
+                <TextBlock x:Name="UpdateSetting" Text="変更が保存されました" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="#ffffff" Margin="0,10,0,0"/>
             </StackPanel>
         </StackPanel>
     </Grid>
