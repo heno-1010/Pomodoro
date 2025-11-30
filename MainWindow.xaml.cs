@@ -119,7 +119,9 @@ namespace Pomodoro
 
         private void SettingButton_Click(object sender, RoutedEventArgs e)
         {
-            if(SettingFrame.Content is Settings)
+            SettingFrame.Visibility = SettingFrame.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+
+            if (SettingFrame.Content is Settings)
             {
                 SettingFrame.Navigate(null);
                 return;

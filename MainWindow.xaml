@@ -19,8 +19,8 @@
                     <Button x:Name="ResetButton" Content="リセット" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="ResetButton_Click" Margin="0,0,10,0"/>
                 </StackPanel>
             </StackPanel>
-            
-            <Frame x:Name="SettingFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+            <Frame x:Name="SettingFrame" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" />
         </Grid>
         <Button x:Name="SettingButton" Content="設定" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Margin="0,0,10,0" Click="SettingButton_Click"/>
     </Grid>
