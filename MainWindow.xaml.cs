@@ -28,7 +28,6 @@ namespace Pomodoro
         public MainWindow()
         {
             InitializeComponent();
-
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
@@ -120,8 +119,17 @@ namespace Pomodoro
 
         private void SettingButton_Click(object sender, RoutedEventArgs e)
         {
-            Settings settingsPage = new Settings(this);
-            SettingFrame.Navigate(settingsPage);
+            if(SettingFrame.Content is Settings)
+            {
+                SettingFrame.Navigate(null);
+                return;
+            }
+            else
+            {
+                Settings settingsPage = new Settings(this);
+                SettingFrame.Navigate(settingsPage);
+            }
+
         }
     }
     }

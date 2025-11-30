@@ -5,20 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pomodoro"
         mc:Ignorable="d"
-        WindowState="Maximized"
-        Title="ポモドーロタイマー" Height="450" Width="450">
+        Title="ポモドーロタイマー" Height="450" Width="450"
+        ResizeMode="CanMinimize">
     <Grid Margin="10,10,10,10">
-        <Button x:Name="SettingButton" Content="設定" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Margin="0,0,10,0" Click="SettingButton_Click"/>
-        <StackPanel VerticalAlignment="Center">
-            <Frame x:Name="SettingFrame"/>
-            <TextBlock x:Name="Timer" Text="25:00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="64"/>
-            <TextBlock x:Name="ModeText" Text="作業開始" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
-            <TextBlock x:Name="CountPomodoro" Text="ポモドーロ数: 0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Margin="0,3,0,0"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0,20,0,0">
-                <Button x:Name="StartButton" Content="スタート" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="StartButton_Click" Margin="0,0,10,0"/>
-                <Button x:Name="SwitchButton" Content="ストップ" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="SwitchButton_Click" Margin="0,0,10,0"/>
-                <Button x:Name="ResetButton" Content="リセット" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="ResetButton_Click" Margin="0,0,10,0"/>
+        <Grid>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock x:Name="Timer" Text="25:00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="64"/>
+                <TextBlock x:Name="ModeText" Text="作業開始" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                <TextBlock x:Name="CountPomodoro" Text="ポモドーロ数: 0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Margin="0,3,0,0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0,20,0,0">
+                    <Button x:Name="StartButton" Content="スタート" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="StartButton_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="SwitchButton" Content="ストップ" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="SwitchButton_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="ResetButton" Content="リセット" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Click="ResetButton_Click" Margin="0,0,10,0"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+            
+            <Frame x:Name="SettingFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Grid>
+        <Button x:Name="SettingButton" Content="設定" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Margin="0,0,10,0" Click="SettingButton_Click"/>
     </Grid>
 </Window>
