@@ -12,17 +12,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.ComponentModel;
 
 
 namespace Pomodoro
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public int Worktime = 25 * 60;
         public int Breaktime = 10 * 60;
         private int Remainingtime;
         public bool Workmode = true; // trueなら作業, falseなら休憩
         private DispatcherTimer timer;
+        private string _timerDisplay = "25:00";
         private int Countpomodoro = 0;
 
         public MainWindow()
@@ -32,8 +36,23 @@ namespace Pomodoro
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
             SwitchButton.IsEnabled = false;
+            DataContext = this;
         }
 
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public string TimerDisplay
+        {
+            get { return _timerDisplay; }
+            set
+            {
+                _timerDisplay = value;
+                OnPropertyChanged(nameof(TimerDisplay));
+            }
+        }
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             StartButton.IsEnabled = false;
@@ -49,7 +68,7 @@ namespace Pomodoro
                 return;
             }
             Remainingtime--;
-            Timer.Text = Timer_TextChanged(Remainingtime);
+            TimerDisplay = Timer_TextChanged(Remainingtime);
         }
 
         private void HandleEndOfSession()
@@ -90,7 +109,7 @@ namespace Pomodoro
             Remainingtime = Workmode ? Worktime : Breaktime;
             ModeText.Text = Workmode ? "作業中" : "休憩中";
             SwitchButton.IsEnabled = true;
-            Timer.Text = Timer_TextChanged(Remainingtime);
+            TimerDisplay = Timer_TextChanged(Remainingtime);
         }
 
         private void SwitchButton_Click(object sender, RoutedEventArgs e)
@@ -110,7 +129,7 @@ namespace Pomodoro
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
-            Timer.Text = Worktime / 60 + ":" + Worktime % 60 + 0;
+            TimerDisplay = $"{ Worktime / 60}:00";
             this.Title = "ポモドーロタイマー";
             SwitchButton.Content = "ストップ";
             SwitchButton.IsEnabled = false;
