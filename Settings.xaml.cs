@@ -36,11 +36,11 @@ namespace Pomodoro
                 _mainwindow.Breaktime = breaktimeText * 60;
                 if (_mainwindow.Workmode)
                 {
-                    _mainwindow.Timer.Text = _mainwindow.Worktime / 60 + ":" + _mainwindow.Worktime % 60 + 0;
+                    _mainwindow.TimerDisplay = $"{worktimeText}:00";
                 }
                 else
                 {
-                    _mainwindow.Timer.Text = _mainwindow.Breaktime / 60 + ":" + _mainwindow.Breaktime % 60 + 0;
+                    _mainwindow.TimerDisplay = $"{breaktimeText}:00";
                 }
             }
             UpdateSetting.Visibility = Visibility.Visible;
