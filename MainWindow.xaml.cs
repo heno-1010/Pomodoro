@@ -29,6 +29,7 @@ namespace Pomodoro
         private string _timerDisplay = "25:00";
         private string _modeText = "作業開始";
         private string _pomodoroCountText = "ポモドーロ数: 0";
+        private string _windowTitle = "ポモドーロタイマー";
         private int Countpomodoro = 0;
 
         public MainWindow()
@@ -50,7 +51,7 @@ namespace Pomodoro
 
         public string TimerDisplay
         {
-            get { return _timerDisplay; }
+            get => _timerDisplay;
             set
             {
                 _timerDisplay = value;
@@ -59,7 +60,7 @@ namespace Pomodoro
         }
         public string ModeText
         {
-            get { return _modeText; }
+            get => _modeText;
             set
             {
                 _modeText = value;
@@ -73,6 +74,15 @@ namespace Pomodoro
             {
                 _pomodoroCountText = value;
                 OnPropertyChanged(nameof(PomodoroCountText));
+            }
+        }
+        public string WindowTitle
+        {
+            get => _windowTitle;
+            set
+            {
+                _windowTitle = value;
+                OnPropertyChanged(nameof(WindowTitle));
             }
         }
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -112,7 +122,7 @@ namespace Pomodoro
             else
             {
                 TimerDisplay = Worktime / 60 + ":00";
-                this.Title = "ポモドーロタイマー";
+                WindowTitle = "ポモドーロタイマー";
                 StartButton.IsEnabled = true;
             }
         }
@@ -127,7 +137,7 @@ namespace Pomodoro
         private void StartTimer()
         {
             timer.Start();
-            this.Title = Workmode ? "作業中" : "休憩中";
+            WindowTitle = Workmode ? "作業中" : "休憩中";
             Remainingtime = Workmode ? Worktime : Breaktime;
             ModeText = Workmode ? "作業中" : "休憩中";
             SwitchButton.IsEnabled = true;
@@ -154,7 +164,7 @@ namespace Pomodoro
             SwitchButton.IsEnabled = false;
             StartButton.IsEnabled = true;
             TimerDisplay = $"{ Worktime / 60}:00";
-            this.Title = "ポモドーロタイマー";
+            WindowTitle = "ポモドーロタイマー";
             SwitchButton.Content = "ストップ";
         }
 

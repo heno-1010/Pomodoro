@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Pomodoro
 {
-    /// <summary>
-    /// Settings.xaml の相互作用ロジック
-    /// </summary>
     public partial class Settings : Page
     {
         private MainWindow _mainwindow;
