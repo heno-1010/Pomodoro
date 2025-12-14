@@ -28,6 +28,7 @@ namespace Pomodoro
         private DispatcherTimer timer;
         private string _timerDisplay = "25:00";
         private string _modeText = "作業開始";
+        private string _pomodoroCountText = "ポモドーロ数: 0";
         private int Countpomodoro = 0;
 
         public MainWindow()
@@ -39,6 +40,7 @@ namespace Pomodoro
             SwitchButton.IsEnabled = false;
             DataContext = this;
             ModeText = "作業開始";
+            PomodoroCountText = "ポモドーロ数: 0";
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -62,6 +64,15 @@ namespace Pomodoro
             {
                 _modeText = value;
                 OnPropertyChanged(nameof(ModeText));
+            }
+        }
+        public string PomodoroCountText
+        {
+            get => _pomodoroCountText;
+            set
+            {
+                _pomodoroCountText = value;
+                OnPropertyChanged(nameof(PomodoroCountText));
             }
         }
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -91,7 +102,7 @@ namespace Pomodoro
             if (!Workmode)
             {
                 Countpomodoro++;
-                CountPomodoro.Text = "ポモドーロ数: " + Countpomodoro;
+                PomodoroCountText = $"ポモドーロ数: {Countpomodoro}";
             }
             if (result == MessageBoxResult.Yes)
             {
